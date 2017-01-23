@@ -6,8 +6,7 @@ function Point(x,y){
 Point.prototype.toString = function () {return `(${this.x}, ${this.y})`}
 
 
-function Shape() {
-}
+function Shape() {}
 
 Shape.prototype.addToPlane = function(x,y) {this.position = new Point(x,y)}
 
@@ -54,7 +53,7 @@ Polygon.prototype.numberOfSides = function() {
 }
 
 function Quadrilateral(sideOne, sideTwo, sideThree, sideFour) {
-	// Polygon.call(this)
+  // Polygon.call(this, [new Side(sideOneLength), new Side(sideTwoLength), new Side(sideThreeLength), new Side(sideFourLength)]);
 	this.sideOne = new Side(sideOne)
   	this.sideTwo = new Side(sideTwo)
   	this.sideThree = new Side(sideThree)
@@ -82,9 +81,17 @@ function Square(side) {
 }
 Square.prototype = Object.create(Rectangle.prototype)
 Square.prototype.listProperties = function() {
-}
+   let props = []
+   for (var prop in this) {
+     if (this.hasOwnProperty(prop)) {
+       props += 'this.' + prop + ' = ' + this[prop]
+     }
+   }
+   return props
+ }
 
 function Triangle(sideOne, sideTwo, sideThree) {
+	// Polygon.call(this, [new Side(sideOneLength), new Side(sideTwoLength), new Side(sideThreeLength)])
   this.sides = [new Side(sideOne), new Side(sideTwo), new Side(sideThree)]
 }
 Triangle.prototype = Object.create(Polygon.prototype)
